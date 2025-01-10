@@ -1,9 +1,10 @@
 const express = require("express")
 const routes = require("./routes/routes");
-
+const bodyParser = require("body-parser")
 
 const app = express();
-app.use(express.json()); // For JSON payloads
+app.use(express.json());
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true })); // For form data
 
 //Connection to MongoDb

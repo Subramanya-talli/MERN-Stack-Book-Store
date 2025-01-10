@@ -11,23 +11,39 @@ async function newBookEntry(req,res)
         newBook.save();
         return res.status(200).send(newBook);
     } catch (error) {
-        return res.status(500).send(error);
+        return res.status(500).send(error.message);
     }
 } 
 
-async function getAllBooks(req, res)
-{
+async function getAllBooks(req, res) {
     try {
         const allBooks = await Book.find({});
-    console.log(allBooks)
-    return res.status(200).json(allBooks)
+        return res.status(200).json({
+            count: allBooks.length,
+            Books: allBooks
+        });
     } catch (error) {
-        return res.status(500).send(error)
+        return res.status(500).send(error.message);
     }
-    
 }
+
+async function getOneBook(req, res) {
+    const { id } = req.params;
+    try {
+        const book = await Book.findById(id)
+        if(!book)
+        {
+            return res.status(400).send({message: "Book Not Found"});
+        }
+        return res.status(200).json(book);
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
 
 module.exports = {
     newBookEntry,
-    getAllBooks
+    getAllBooks,
+    getOneBook
 }
