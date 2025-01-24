@@ -1,10 +1,11 @@
 const express = require("express")
 const routes = require("./routes/routes");
-const bodyParser = require("body-parser")
+const cors = require("cors");
+
 
 const app = express();
+app.use(cors());
 app.use(express.json());
-app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true })); // For form data
 
 //Connection to MongoDb
@@ -20,7 +21,9 @@ app.get('/', (req,res)=>
 {
     return res.send("Hello World");
 });
+
 app.use("/books", routes);
+
 
 app.listen(PORT , ()=>{
     console.log(`App is running in ${PORT} Port`);

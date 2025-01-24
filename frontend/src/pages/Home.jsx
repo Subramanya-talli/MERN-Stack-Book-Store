@@ -7,23 +7,23 @@ import { MdOutlineAdd } from "react-icons/md";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(false); // ✅ Corrected useState
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5173/books")
+      .get("http://localhost:8000/books") 
       .then((response) => {
-        console.log(response);
-        setBooks(response.data.data);
+        console.log("Axios Response:", response);
+        setBooks(response.data.Books);
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching books:", error);
+        console.error("Error fetching books:", error.response || error.message);
         setLoading(false);
       });
   }, []);
-
+  
   return (
     <div className="p-4">
       <div className="flex justify-between items-center">
@@ -55,7 +55,13 @@ const Home = () => {
               </th>
             </tr>
           </thead>
-          <tbody>{console.log(books)}</tbody>
+          <tbody>{
+            books.map((index, book)=>{
+              <tr key={book._id} className="h-8">
+                <td className="border border-slate-700 rounded-md text-center">{ index + 1}</td>
+              </tr>
+            })
+            }</tbody>
         </table>
       )}
     </div>

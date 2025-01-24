@@ -17,7 +17,7 @@ async function newBookEntry(req,res)
 
 async function getAllBooks(req, res) {
     try {
-        const allBooks = await Book.find({});
+        const allBooks = await Book.find();
         return res.status(200).json({
             count: allBooks.length,
             Books: allBooks
