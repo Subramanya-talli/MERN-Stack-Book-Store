@@ -1,6 +1,7 @@
 const express = require("express")
 const routes = require("./routes/routes");
 const cors = require("cors");
+const {  getAllBooks } = require("../backEnd/controller/controller")
 
 
 const app = express();
@@ -17,10 +18,7 @@ const dotenv = require("dotenv").config()
 const PORT = process.env.PORT;
 
 //Routes
-app.get('/', (req,res)=>
-{
-    return res.send("Hello World");
-});
+app.get('/', getAllBooks)
 
 app.use("/books", routes);
 

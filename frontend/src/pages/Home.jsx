@@ -4,15 +4,17 @@ import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineAdd } from "react-icons/md";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:8000/books") 
+      .get("http://localhost:8000")
       .then((response) => {
         console.log("Axios Response:", response);
         setBooks(response.data.Books);
@@ -23,7 +25,9 @@ const Home = () => {
         setLoading(false);
       });
   }, []);
-  
+
+  console.log(books);
+
   return (
     <div className="p-4">
       <div className="flex justify-between items-center">
@@ -55,13 +59,37 @@ const Home = () => {
               </th>
             </tr>
           </thead>
-          <tbody>{
-            books.map((index, book)=>{
+          <tbody>
+            {books.map((book, index) => (
               <tr key={book._id} className="h-8">
-                <td className="border border-slate-700 rounded-md text-center">{ index + 1}</td>
+                <td className="border border-slate-700 rounded-md text-center">
+                  {index + 1}
+                </td>
+                <td className="border border-slate-700 rounded-md text-center">
+                  {book.author}
+                </td>
+                <td className="border border-slate-700 rounded-md text-center">
+                  {book.title}
+                </td>
+                <td className="border border-slate-700 rounded-md text-center">
+                  {book.publishYear}
+                </td>
+                <td className="border border-slate-700 rounded-md text-center ">
+                  <div className="flex justify-center gap-x-4">
+                    <Link to={`/books/edit/${book._id}`}>
+                      <AiOutlineEdit className="m-3 text-xl text-green-800" />
+                    </Link>
+                    <Link to={`/books/details/${book._id}`}>
+                      <AiOutlineInfoCircle className="m-3 text-xl text-yellow-800" />
+                    </Link>
+                    <Link to={`/books/delete/${book._id}`}>
+                      <AiFillDelete className="m-3 text-xl text-blue-900" />
+                    </Link>
+                  </div>
+                </td>
               </tr>
-            })
-            }</tbody>
+            ))}
+          </tbody>
         </table>
       )}
     </div>
