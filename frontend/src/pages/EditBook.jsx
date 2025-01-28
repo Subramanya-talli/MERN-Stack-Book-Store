@@ -9,7 +9,20 @@ const EditBook = () => {
   const [loading, setLoading] = useState(false);
   const {id} = useParams();
   
-
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:8000/books/details/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setBook(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching books:", error.response || error.message);
+        setLoading(false);
+      });
+  }, []);
   
   return (
     <div className='my-6 flex items-center justify-center'>
