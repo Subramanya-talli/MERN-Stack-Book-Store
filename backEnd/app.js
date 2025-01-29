@@ -29,5 +29,5 @@ app.listen(PORT , ()=>{
 
 connectionToMongoDB(process.env.MongoDB_Url).then(()=>
 {
-    console.log("App is Connected To DB");
+    console.log("App is Connected To Data Base");
 });

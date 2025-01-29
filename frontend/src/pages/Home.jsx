@@ -16,7 +16,6 @@ const Home = () => {
     axios
       .get("http://localhost:8000")
       .then((response) => {
-        console.log("Axios Response:", response);
         setBooks(response.data.Books);
         setLoading(false);
       })
@@ -26,14 +25,13 @@ const Home = () => {
       });
   }, []);
 
-  console.log(books);
 
   return (
     <div className="p-4">
       <div className="flex justify-between items-center">
-        <h1 className="text 3xl my-8">Books List</h1>
-        <Link to="books/newBook" className="bg-green-600	">
-          <MdOutlineAdd className="text-green-800 text-4xl" />
+        <h1 className="text-3xl my-8">Books List</h1>
+        <Link to="books/newBook" className="bg-white-600	">
+          <MdOutlineAdd className="border-2 border-green-600 rounded text-4xl " />
         </Link>
       </div>
       {loading ? (

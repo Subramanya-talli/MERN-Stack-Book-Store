@@ -12,9 +12,9 @@ const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:8000books/edit//${id}`)
+      .get(`http://localhost:8000/details/${id}`)
       .then((response) => {
-        console.log(response);
+        console.log(response)
         setBook(response);
         setLoading(false);
       })
@@ -24,7 +24,6 @@ const ShowBook = () => {
       });
   }, []);
 
-  console.log(book)
   return (
     <div className="p-4">
       <BackButton />

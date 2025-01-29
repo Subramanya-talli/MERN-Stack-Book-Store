@@ -8,7 +8,7 @@ async function newBookEntry(req,res)
             return res.status(400).send({ message : "Send all the required details: title, author, Publish Year"})
         }
         const newBook = await Book.create({title, publishYear, author});
-        newBook.save();
+        // newBook.save();
         return res.status(200).send(newBook);
     } catch (error) {
         return res.status(500).send(error.message);
