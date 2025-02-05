@@ -1,6 +1,6 @@
 const express = require("express")
 const routes = require("./routes/routes");
-const cors = require("cors");
+const cors = require('cors');
 const {  getAllBooks } = require("../backEnd/controller/controller")
 
 

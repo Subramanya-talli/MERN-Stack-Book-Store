@@ -12,10 +12,9 @@ const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:8000/details/${id}`)
+      .get(`http://localhost:8000/books/details/${id}`)
       .then((response) => {
-        console.log(response)
-        setBook(response);
+        setBook(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -23,6 +22,7 @@ const ShowBook = () => {
         setLoading(false);
       });
   }, []);
+
 
   return (
     <div className="p-4">
@@ -34,27 +34,27 @@ const ShowBook = () => {
         <div className="m-4 flex flex-col border-2 border-green-600 rounded-xl w-fit p-4">
           <div className="my-4">
             <span className="text-xl mr-4 text-grey-500">Id :</span>
-            <span>{book._id}</span>
+            <span className="text-xl">{book._id}</span>
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-grey-500">Author Name :</span>
-            <span>{book.author}</span>
+            <span className="text-xl">{book.author}</span>
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-grey-500">Title :</span>
-            <span>{book.title}</span>
+            <span className="text-xl">{book.title}</span>
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-grey-500">Published Year :</span>
-            <span>{book.publishYear}</span>
+            <span className="text-xl">{book.publishYear}</span>
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-grey-500">Created At :</span>
-            <span>{book.createdAt}</span>
+            <span className="text-xl">{book.createdAt}</span>
           </div>
           <div className="my-4">
-            <span className="text-xl mr-4 text-grey-500">Updated At :</span>
-            <span>{book.updatedAt}</span>
+            <span className="text-xl mr-4 text-grey-500 ">Updated At :</span>
+            <span className="text-xl">{book.updatedAt}</span>
           </div>
         </div>
       )}

@@ -13,7 +13,7 @@ const CreateBook = () => {
   const navigate = useNavigate();
 
   const handleSaveBook = () => {
-    if (!title.trim() || !author.trim() || !publishYear.trim()) {
+    if (!title.trim() || !author.trim() || !String(publishYear).trim()) {
       setError("All fields are required!");
       return;
     }
