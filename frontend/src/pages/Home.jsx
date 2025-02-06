@@ -65,10 +65,10 @@ const Home = () => {
                   {index + 1}
                 </td>
                 <td className="border border-slate-700 rounded-md text-center">
-                  {book.author}
+                  {book.title}
                 </td>
                 <td className="border border-slate-700 rounded-md text-center">
-                  {book.title}
+                  {book.author}
                 </td>
                 <td className="border border-slate-700 rounded-md text-center">
                   {book.publishYear}

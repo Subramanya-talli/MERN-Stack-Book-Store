@@ -42,15 +42,19 @@ async function getOneBook(req, res) {
 }
 
 async function UpdateBook(req, res) {
-    
+    const { title, author, publishYear} = req.body
     try {
-        if(!req.body.title || !req.body.author || !req.body.publishYear)
+        if(!title || !author || !publishYear)
         {
             return res.status(400).send({ message : "Send all the required details: title, author, Publish Year"})
         }
-        const { id } = req.params;
 
-        const book = await Book.findById(id)
+        const book = await await Book.findByIdAndUpdate(
+            req.params.id,
+            { title, author, publishYear },
+            { new: true, runValidators: true }
+          );
+      
         if(!book)
         {
             return res.status(404).send({message: "Book Not Found"});
