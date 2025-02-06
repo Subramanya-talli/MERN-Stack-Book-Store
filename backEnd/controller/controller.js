@@ -1,5 +1,6 @@
 const Book = require("../models/bookSchema");
 
+
 async function newBookEntry(req,res)
 {
     const { title, publishYear, author} = req.body;
@@ -65,19 +66,20 @@ async function UpdateBook(req, res) {
     }
 }
 
-async function deleteBook(req, res)
-{
+async function deleteBook(req, res) {
     try {
         const { id } = req.params;
-        
+
         const book = await Book.findByIdAndDelete(id);
-    
+        console.log(book)
+
         if (!book) {
-            return res.status(404).json({ message: "Book Not found"});
+            return res.status(404).json({ message: "Book Not Found" });
         }
-        return res.status(200).send({ message : "Book Deleted Successfully"});
+
+        return res.status(200).json({ message: "Book Deleted Successfully" });
     } catch (error) {
-        return res.status(500).send(error.message);
+        return res.status(500).json({ message: error.message });
     }
 }
 
